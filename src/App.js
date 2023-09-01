@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Provider } from 'react-redux';
+import store from './reducer/store';
+
+import Auth from './authRoutes/auth';
+import Dashbaord from './dashboardRoutes/dashboard';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const ProviderConfig = () =>{
+  return (
+    <div className='App'>
+      <Router basename="/staff" forceRefresh={true}>
+        {
+          true? <Auth/> :<Dashbaord />
+        }
+      </Router>
+    </div>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+ <Provider store={store}>
+   <ProviderConfig />
+ </Provider>
   );
 }
 
